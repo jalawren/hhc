@@ -1,0 +1,25 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+//html{
+//  padding:0px;
+//  margin:0px;
+//  height: 100%;
+//}
+//body {
+//  padding:0px;
+//  margin:0px;
+//  min-height: 100%;
+//}
+#header {
+  height: 320px;
+  background-image: url("/images/banner2.jpg");
+}
+
