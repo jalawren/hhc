@@ -11,22 +11,54 @@
 |
 */
 
+/**
+ * Home Page
+ */
 Route::get('/', function () {
-    return view('home');
+    return view('about');
 })->name('home');
 
+/**
+ * About Page
+ */
 Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+/**
+ * Philosophy Page
+ */
 Route::get('/philosophy', function () {
     return view('philosophy');
 })->name('philosophy');
 
+/**
+ * Contact Page
+ */
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/links', function () {
-    return view('links');
-})->name('links');
+/**
+ * Resource Controller
+ */
+Route::resource('/resources', 'ResourceController');
+
+/**
+ * Blog Controller
+ */
+Route::resource('/blog', 'PostController');
+
+/**
+ *
+ * Auth Routes
+ */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+//Route::get('/blog', 'BlogController@index')->name('blog');
+//Route::post('/blog', 'BlogController@store');
+//Route::get('/blog/create', 'BlogController@create');
+//Route::get('/blog/{slug}', 'BlogController@show');

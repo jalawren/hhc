@@ -8,18 +8,162 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-//html{
-//  padding:0px;
-//  margin:0px;
-//  height: 100%;
-//}
-//body {
-//  padding:0px;
-//  margin:0px;
-//  min-height: 100%;
-//}
-#header {
-  height: 320px;
-  background-image: url("/images/banner2.jpg");
+body {
+  padding: 0px;
+
 }
 
+//Text Elements
+h1, h3, .blog-user {
+  color: #6E8B3D;
+}
+//Page Elements
+.header {
+  height: 280px;
+  background-image: url("/images/banner2.jpg");
+  color: #FFFFFF;
+  font-size: 18px;
+  padding: 20px;
+}
+
+.header h3, .header p {
+  margin:0px;
+}
+
+.navigation {
+  height: 40px;
+  background-color: #6E8B3D;
+}
+.container {
+//  padding:0px;
+  min-height: 400px;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+.container a {
+
+  margin-top: 50px;
+  color: #6E8B3D;
+  font-weight: bold;
+}
+.footer {
+
+  background-color: #383838;
+  padding: 40px;
+  height: 200px;
+  padding-left:200px;
+}
+.footer-box {
+
+  float: left;
+  padding: 0px 50px;
+  border-right: 1px solid #FFFFFF;
+
+}
+.footer-list li {
+
+  display:block;
+  text-decoration: none;
+  margin: 10px;
+}
+.footer a {
+
+  color: #FFFFFF;
+}
+.imprint {
+
+  text-align: center;
+  clear:both;
+  background-color: #212121;
+}
+.pagination {
+
+  border-color: #6E8B3D;
+  color: #6E8B3D;
+  width: 400px;
+}
+.pagination li a {
+
+  color: #6E8B3D;
+}
+//.pagination li span {
+//}
+.pagination .active span, .pagination .active span:hover {
+
+  background-color: #6E8B3D;
+  border-color: #6E8B3D;
+}
+.blog-entry {
+
+  min-height: 80px;
+  border: 1px solid #636b6f;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-decoration: none;
+
+}
+
+a:hover {
+
+  text-decoration: none;
+}
+
+.blog-entry h3 {
+
+  margin-top: 10px;
+}
+
+.blog-entry p {
+
+  font-size: 12px;
+  color: #636b6f;
+}
+
+.blog-entry:hover {
+
+  background-color: #EEF3E2;
+  text-decoration: none;
+}
+
+.post-date {
+
+  font-size: 12px;
+  color: #636b6f;
+}
+
+.resource-list:hover {
+
+  background-color: #F0F0F0;
+}
+
+.hhc-btn {
+
+  background-color: #6E8B3D;
+  border-color: #556B2F;
+  color: #FFFFFF;
+}
+
+.hhc-btn:hover {
+
+  background-color: #6B8E23;
+  border-color: #556B2F;
+  color: #FFFFFF;
+}
+.hhc-btn:active {
+
+  background-color: #556B2F;
+  border-color: #556B2F;
+  color: #FFFFFF;
+}
+.hhc-btn:focus {
+
+  background-color: #556B2F;
+  border-color: #556B2F;
+  color: #FFFFFF;
+}
+
+.blog-list {
+
+  padding-left:0px;
+}

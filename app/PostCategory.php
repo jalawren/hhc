@@ -2,12 +2,16 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class PostCategory extends Model
 {
-    use Notifiable;
+    /**
+     * The database table name
+     *
+     * @var string
+     */
+    protected $table = 'post_categories';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'description'
     ];
 
     /**
@@ -24,12 +28,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'created_at', 'updated_at'
+        'created_at', 'updated_at'
     ];
 
-
     /**
-     * Get Blog Entries for User
+     * Get the Posts for the selected Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

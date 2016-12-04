@@ -168,7 +168,8 @@ return [
          * Package Service Providers...
          */
 
-       // Serverfireteam\Blog\BlogServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+
 
         /*
          * Application Service Providers...
