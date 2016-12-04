@@ -37,7 +37,7 @@
                             <li><a href="{{ $url = route('philosophy') }}">health philosophy</a></li>
                             <li><a href="{{ $url = route('contact') }}">contact</a></li>
                             <li><a href="/blog">blog</a></li>
-                            <li><a href="{{ $url = route('resources') }}">resources</a></li>
+                            <li><a href="/resources">resources</a></li>
                         </ul>
                     </div>
                 </div>
