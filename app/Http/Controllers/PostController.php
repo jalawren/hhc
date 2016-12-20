@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\PostCategory;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Post;
 use Carbon\Carbon;
@@ -20,7 +21,7 @@ class PostController extends Controller
      */
     public function __construct(Post $post)
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show', 'indexByTag']);
 
         $this->post = $post;
     }
@@ -33,12 +34,35 @@ class PostController extends Controller
     public function index()
     {
         $posts = $this->post
-            ->with('user', 'category')
+            ->with('user', 'tags')
             ->where('published_at', '<=', Carbon::now())
             ->orderBy('published_at', 'desc')
             ->paginate(config('blog.posts_per_page'));
 
+
         return view('blog.index', compact('posts'));
+    }
+
+    /**
+     * Display a listing of the resource filtered by category.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexByTag($slug, Tag $tag)
+    {
+        $tags = $tag->findPosts($slug);
+
+        $tag_name = $tag->where('slug', $slug)->first();
+
+        $posts = $this->post
+            ->with('user', 'tags')
+            ->whereIn('id', $tags)
+            ->where('published_at', '<=', Carbon::now())
+            ->orderBy('published_at', 'desc')
+            ->paginate(config('blog.posts_per_page'));
+
+        return view('blog.tag', compact(['tag_name', 'posts']));
+
     }
 
     /**
@@ -50,12 +74,11 @@ class PostController extends Controller
     public function show($slug)
     {
         $post = $this->post
-            ->with('user', 'category')
+            ->with('user', 'tags')
             ->whereSlug($slug)
             ->firstOrFail();
 
-        return view('blog.show')
-            ->withPost($post);
+        return view('blog.show')->withPost($post);
     }
 
     /**
@@ -63,37 +86,27 @@ class PostController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(PostCategory $category)
+    public function create(PostCategory $category, Tag $tag)
     {
         $categories = $category->all();
 
-        return view('blog.create', compact('categories'));
+        $tags = $tag->all();
+
+        return view('blog.create', compact(['categories', 'tags']));
     }
 
     /**
      * @param Request $request
      * @return array|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request, Tag $tag)
     {
-        $input = $request->all();
+        $this->validate($request, [
+            'title' => 'bail|required|max:255',
+            'content' => 'required',
+        ]);
 
-        if($input['title'] != NULL && $input['content'] != NULL)
-        {
-            $array = [
-                'user_id' => Auth::id(),
-                'category_id' => $input['category'],
-                'title' => $input['title'],
-                'content' => $input['content']
-            ];
-
-            $this->post->create($array);
-
-            flash('The blog entry posted successfully!', 'success');
-
-            return redirect('/blog');
-        }
-
+        return $this->post->storePost($request);
     }
 
     /**
@@ -102,13 +115,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, PostCategory $category)
+    public function edit($id, Tag $tag)
     {
-        $posts = $this->post->find($id);
+        $posts = $this->post
+            ->with('tags')
+            ->find($id);
 
-        $categories = $category->all();
+//        $all = $tag->all()->toArray();
+//        $my = $posts->tags->toArray();
 
-        return view('blog.edit', compact(['posts', 'categories']));
+//        return array_diff($all, $my);
+//return $posts;
+
+        return view('blog.edit', compact('posts'));
     }
 
     /**
@@ -120,7 +139,14 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'bail|required|max:255',
+            'content' => 'required',
+        ]);
+
+        $post = $this->post->find($id);
+
+        return $this->post->updatePost($request, $post);
     }
 
     /**
@@ -133,25 +159,6 @@ class PostController extends Controller
     {
         $input = $this->post->find($id);
 
-        if($this->post->find($id) != NULL)
-        {
-            $name = $input->slug;
-
-            $input->delete();
-
-            if($this->post->find($id) == NULL)
-            {
-                flash('The blog entry, '. $name .' was deleted successfully!', 'success');
-
-                return redirect('/blog');
-            }
-            flash('There was a problem deleting blog entry, '. $name .' Please try again.', 'danger');
-
-            return redirect(Route::current());
-        }
-        flash('The blog entry does not exist', 'warning');
-
-        return redirect('/blog');
-
+        return $this->post->deletePost($input, $id);
     }
 }

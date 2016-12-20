@@ -38,6 +38,6 @@ class PostCategory extends Model
      */
     public function Post()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Post', 'category_id');
     }
 }

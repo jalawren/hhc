@@ -27,10 +27,9 @@ class ResourceCategoryTableSeeder extends Seeder
 
         $records = [
 
-            0 => ['name' => 'General Wellness', 'description' => 'Tips for overall healthy living'],
-            1 => ['name' => 'Nutrition', 'description' => 'Healthy choices for meals, snacks and drinks'],
-            2 => ['name' => 'Exercise', 'description' => 'Tips for managing an active lifestyle'],
-            3 => ['name' => 'Mental Health', 'description' => 'Tips for a healthy mind']
+            0 => ['name' => 'Websites', 'description' => 'Websites for healthy habits and nutrition'],
+            1 => ['name' => 'Books', 'description' => 'Books on healthy living'],
+            2 => ['name' => 'Podcasts', 'description' => 'Podcasts on healthy living']
         ];
 
         /**

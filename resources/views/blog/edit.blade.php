@@ -6,12 +6,12 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">new blog entry</div>
+        <div class="panel panel-default hhc-row">
+            <div class="panel-heading">edit blog entry</div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="/blog">
+                <form class="form-horizontal" method="POST" action="/blog/{{ $posts->id }}">
+                    {{ method_field('PATCH') }}
                     {{ csrf_field() }}
-
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="title">title:</label>
                         <div class="col-sm-10">
@@ -20,30 +20,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="category">category:</label>
+                        <label class="control-label col-sm-2" for="tags">tags:</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="category" name="category">
+                            <p>
+                                @foreach($posts->tags as $tag)
 
-                                @foreach($categories as $category)
-
-                                    @if($posts->category_id == $category->id)
-
-                                        <option selected="selected" value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @else
-
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endif
+                                    <label class="checkbox-inline"><input type="checkbox" name="tags[]" value="{{ $tag->id }}" checked>{{ $tag->title }}</label>
 
                                 @endforeach
+                            </p>
 
-                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">content:</label>
+                        <label class="control-label col-sm-2" for="content">content:</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="content" name="content"  rows="8">{{ $posts->content }}</textarea>
+                            <textarea class="form-control" id="content" name="content"  rows="12">{{ $posts->content }}</textarea>
                         </div>
                     </div>
 
@@ -53,8 +46,19 @@
                         </div>
                     </div>
                 </form>
+                <div class="form-group">
+                    <div class="edit-buttons col-sm-offset-2 col-sm-10">
+                        <form method="POST" action="/blog/{{ $posts->id }}">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
 
-                <button onclick="window.location.href='/blog/{{ $posts->slug }}'" class="btn hhc-btn">Cancel</button>
+                            <button class="btn hhc-btn" type="submit">Delete</button>
+                        </form>
+
+                        <button onclick="window.location.href='/blog/{{ $posts->slug }}'" class="btn hhc-btn">Cancel</button>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

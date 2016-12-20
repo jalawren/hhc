@@ -36,8 +36,8 @@ class ResourceCategory extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function Resource()
+    public function resource()
     {
-        return $this->hasMany('App\Resource');
+        return $this->hasMany('App\Resource', 'category_id');
     }
 }

@@ -10,32 +10,47 @@
 
 body {
   padding: 0px;
+  background-color: #F7F7F7;
 
 }
 
 //Text Elements
-h1, h3, .blog-user {
+h1, h3, h4, h5, .blog-user {
+
   color: #6E8B3D;
+}
+h4 {
+
+  font-size: 18px;
+}
+
+h5{
+
+  font-size: 16px;
 }
 //Page Elements
 .header {
+
   height: 280px;
-  background-image: url("/images/banner2.jpg");
+  background-image: url("/images/banner3.jpg");
   color: #FFFFFF;
   font-size: 18px;
   padding: 20px;
 }
 
 .header h3, .header p {
+
   margin:0px;
+  text-shadow: 2px 2px 3px #383838;
 }
 
 .navigation {
+
   height: 40px;
   background-color: #6E8B3D;
 }
 .container {
-//  padding:0px;
+
   min-height: 400px;
   padding-bottom: 50px;
   padding-top: 50px;
@@ -80,28 +95,32 @@ h1, h3, .blog-user {
 
   border-color: #6E8B3D;
   color: #6E8B3D;
-  width: 400px;
 }
 .pagination li a {
 
   color: #6E8B3D;
+  float:left;
 }
-//.pagination li span {
-//}
-.pagination .active span, .pagination .active span:hover {
+.pagination li  {
+
+  display: inline;
+}
+
+.pagination .active a, .pagination .active a:hover {
 
   background-color: #6E8B3D;
   border-color: #6E8B3D;
+
 }
 .blog-entry {
 
   min-height: 80px;
   border: 1px solid #636b6f;
+  background-color: #FFFFFF;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 20px;
   text-decoration: none;
-
 }
 
 a:hover {
@@ -132,9 +151,29 @@ a:hover {
   color: #636b6f;
 }
 
-.resource-list:hover {
+.resource-list {
 
-  background-color: #F0F0F0;
+  margin-left: 20px;
+}
+
+.resource-item {
+
+  margin: 15px 0px 15px 40px;
+  color: #636b6f;
+}
+
+.resource-item:hover {
+
+  background-color: #EEF3E2;
+}
+
+.resource-item h4 {
+
+  margin-bottom: 4px;
+}
+.resource-item p {
+
+  font-weight:lighter;
 }
 
 .hhc-btn {
@@ -167,3 +206,58 @@ a:hover {
 
   padding-left:0px;
 }
+.logout {
+
+  background:none;
+  border:0
+}
+
+.edit-buttons {
+
+  padding-left:4px;
+}
+
+.edit-buttons button {
+
+  float:left;
+  margin-right: 10px;
+}
+
+.message-box {
+
+  padding: 10px 0;
+}
+
+.category-active a {
+
+  background-color: #EEF3E2;
+}
+
+.blog-category-list {
+
+  display:block;
+  text-decoration: none;
+}
+
+.hhc-navbar {
+
+  z-index:1000;
+  border-radius: 0px;
+}
+
+.hhc-panel {
+
+  padding: 10px;
+  border-color: #636b6f;
+}
+
+.hhc-badge {
+
+  background-color: #6E8B3D;
+}
+
+.hhc-label {
+
+  background-color: #6E8B3D;
+}
+

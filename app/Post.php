@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -10,6 +11,13 @@ class Post extends Model
      * The database table name
      *
      * @var string
+     */
+    protected $table = 'posts';
+
+    /**
+     * Dates variable
+     *
+     * @var array
      */
     protected $dates = ['published_at'];
 
@@ -31,6 +39,11 @@ class Post extends Model
         'created_at', 'updated_at'
     ];
 
+    /**
+     * Set the name of the Post Slug
+     *
+     * @param $value
+     */
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
@@ -60,4 +73,106 @@ class Post extends Model
     {
         return $this->belongsTo('App\PostCategory', 'category_id', 'id');
     }
+
+    /**
+     * Get Tags for Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
+
+
+    /**
+     * Store new Blog Post
+     *
+     * @param $input
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function storePost($input)
+    {
+        if($input['title'] != NULL && $input['content'] != NULL)
+        {
+            $array = [
+                'user_id' => Auth::id(),
+                'title' => $input['title'],
+                'content' => $input['content']
+            ];
+
+            $this->create($array);
+
+            $record = $this->latest()->first();
+
+            foreach($input['tags'] as $tag)
+            {
+
+                $record->tags()->attach($tag);
+            }
+
+            flash('The blog entry posted successfully!', 'success');
+
+            return redirect('/blog');
+        }
+    }
+
+
+    /**
+     * Update the Post Table
+     *
+     * @param $input
+     * @param $post
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updatePost($input, $post)
+    {
+        if($input['title'] != NULL && $input['content'] != NULL)
+        {
+            $post->user_id = Auth::id();
+
+            $post->title = $input['title'];
+
+            $post->content = $input['content'];
+
+            $post->save();
+
+            flash('The blog entry was updated successfully!', 'success');
+
+            return redirect('/blog');
+        }
+    }
+
+    /**
+     * Delete From The Post Table
+     *
+     * @param $input
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deletePost($input, $id)
+    {
+        if($input != NULL)
+        {
+            $name = $input->slug;
+
+            $input->delete();
+
+            if($this->find($id) == NULL)
+            {
+                flash('The blog entry, '. $name .' was deleted successfully!', 'success');
+
+                return redirect('/blog');
+            }
+
+            flash('There was a problem deleting blog entry, '. $name .' Please try again.', 'danger');
+
+            return redirect(Route::current());
+        }
+
+        flash('The blog entry does not exist', 'warning');
+
+        return redirect('/blog');
+    }
+
 }

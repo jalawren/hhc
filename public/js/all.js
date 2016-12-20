@@ -6,8 +6,7 @@
  */
 
 require('./bootstrap');
-//require('./bootstrap-tagsinput');
-
+require('./jquery.min');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -16,36 +15,28 @@ require('./bootstrap');
  */
 
 //Vue.component('example', require('./components/Example.vue'));
-$(document).ready(function(){
-    const app = new Vue({
 
-        el: '#app',
+const app = new Vue({
 
-        data: {
-            input: '',
+    el: '#app',
 
-            dom: '',
+    data: {
+        input: '',
 
-            tags: []
+        tags: {
 
-
-        },
-
-        methods: {
-
-            addTag: function() {
-
-                this.tags.push(this.input);
-
-                this.input = '';
-            },
-
-            selectTag: function(event) {
-                this.dom = event.target.tagName;
-
-                event.target.setAttribute(selected, selected);
-
-            }
         }
-    });
+    },
+
+    methods: {
+
+        addTag: function() {
+
+            tags.push(this.input);
+
+            this.input = '';
+        }
+    }
 });
+
+//# sourceMappingURL=all.js.map

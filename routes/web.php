@@ -47,6 +47,7 @@ Route::resource('/resources', 'ResourceController');
 /**
  * Blog Controller
  */
+Route::get('/blog/tag/{id}', 'PostController@indexByTag');
 Route::resource('/blog', 'PostController');
 
 /**
@@ -58,7 +59,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 
-//Route::get('/blog', 'BlogController@index')->name('blog');
-//Route::post('/blog', 'BlogController@store');
-//Route::get('/blog/create', 'BlogController@create');
-//Route::get('/blog/{slug}', 'BlogController@show');

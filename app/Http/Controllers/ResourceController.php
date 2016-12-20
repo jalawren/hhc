@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Resource;
+use App\ResourceCategory;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -25,11 +26,12 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ResourceCategory $category)
     {
-        $resources = $this->resource->all();
+        $categories = $category->with('resource')->get();
 
-        return view('resource.index', compact('resources'));
+        return view('resource.index', compact('categories'));
+//        return $categories;
     }
 
     /**
@@ -37,9 +39,12 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ResourceCategory $category)
     {
-        return view('resource.create');
+        $categories = $category->all();
+
+        return view('resource.create', compact('categories'));
+
     }
 
     /**
@@ -50,7 +55,12 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'bail|required|max:255',
+            'url' => 'required|max:255',
+        ]);
+
+        return $this->resource->storeResource($request);
     }
 
     /**
@@ -70,9 +80,13 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, ResourceCategory $category)
     {
-        //
+        $resources = $this->resource->find($id);
+
+        $categories = $category->all();
+
+        return view('resource.edit', compact(['resources', 'categories']));
     }
 
     /**
@@ -84,7 +98,15 @@ class ResourceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'bail|required|max:255',
+            'url' => 'required|max:255'
+        ]);
+
+        $resource = $this->resource->find($id);
+
+        return $this->resource->updateResource($request, $resource);
+
     }
 
     /**
@@ -95,6 +117,8 @@ class ResourceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $input = $this->resource->find($id);
+
+        return $this->resource->deleteResource($input, $id);
     }
 }
