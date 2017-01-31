@@ -41,7 +41,12 @@
                         </div>
                     </div>
 
-
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="author">author:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="author" name="author" value="{{ $resources->author }}" required>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="description">description:</label>

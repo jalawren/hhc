@@ -34,6 +34,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label col-sm-2" for="author">author:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="author" name="author" placeholder="Author" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label col-sm-2" for="description">content:</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" id="description" name="description" placeholder="Enter Description" rows="4"></textarea>

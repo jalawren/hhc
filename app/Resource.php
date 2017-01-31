@@ -19,7 +19,7 @@ class Resource extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'category_id', 'url', 'description'
+        'name', 'author', 'category_id', 'url', 'description'
     ];
 
     /**
@@ -60,6 +60,7 @@ class Resource extends Model
             $array = [
                 'category_id' => $input['category'],
                 'name' => $input['name'],
+                'author' => $input['author'],
                 'description' => $input['description'],
                 'url' => $url
             ];
@@ -92,6 +93,7 @@ class Resource extends Model
 
             $resource->category_id = $input['category'];
             $resource->name = $input['name'];
+            $resource->author = $input['author'];
             $resource->description = $input['description'];
             $resource->url = $url;
 

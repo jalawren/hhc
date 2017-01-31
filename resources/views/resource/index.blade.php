@@ -4,11 +4,11 @@
 
 @section('content')
 
-    <div class="message-box">
+    {{--<div class="message-box">--}}
 
-        @include('flash::message')
+        {{--@include('flash::message')--}}
 
-    </div>
+    {{--</div>--}}
 
     <h3>Healthy Resources</h3>
 

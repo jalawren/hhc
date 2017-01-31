@@ -11,9 +11,7 @@
             <p>
                 email: <a href="mailto:justin@healthhabitcoach.com">justin@healthhabitcoach.com</a>
             </p>
-            <p>
-                phone: 859-555-5555
-            </p>
+
         </div>
     </div>
 @endsection
