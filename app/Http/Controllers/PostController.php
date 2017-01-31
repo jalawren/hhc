@@ -39,7 +39,6 @@ class PostController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(config('blog.posts_per_page'));
 
-
         return view('blog.index', compact('posts'));
     }
 
@@ -96,6 +95,8 @@ class PostController extends Controller
     }
 
     /**
+     * Save the new resource.
+     *
      * @param Request $request
      * @return array|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -107,6 +108,7 @@ class PostController extends Controller
         ]);
 
         return $this->post->storePost($request);
+//        return $request->all();
     }
 
     /**
@@ -117,17 +119,13 @@ class PostController extends Controller
      */
     public function edit($id, Tag $tag)
     {
-        $posts = $this->post
+        $post = $this->post
             ->with('tags')
             ->find($id);
 
-//        $all = $tag->all()->toArray();
-//        $my = $posts->tags->toArray();
+        $tags = $tag->updateTags($id);
 
-//        return array_diff($all, $my);
-//return $posts;
-
-        return view('blog.edit', compact('posts'));
+        return view('blog.edit', compact(['post', 'tags']));
     }
 
     /**
@@ -157,8 +155,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $input = $this->post->find($id);
+        $post = $this->post->find($id);
 
-        return $this->post->deletePost($input, $id);
+        return $this->post->deletePost($post, $id);
     }
 }

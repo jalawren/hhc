@@ -43,15 +43,15 @@ class TagTableSeeder extends Seeder
             $this->tag->create($record);
 
         }
-
-        for($i=1; $i < 5; $i++) {
-
-            $post = Post::find($i);
-
-            $post->tags()->attach(1);
-            $post->tags()->attach(2);
-            $post->tags()->attach(3);
-            $post->tags()->attach(4);
-        }
+//
+//        for($i=1; $i < 5; $i++) {
+//
+//            $post = Post::find($i);
+//
+//            $post->tags()->attach(1);
+//            $post->tags()->attach(2);
+//            $post->tags()->attach(3);
+//            $post->tags()->attach(4);
+//        }
     }
 }

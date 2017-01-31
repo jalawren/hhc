@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder
         $records = [
 
             0 => ['name' => 'Jason Lawrence', 'email' => 'jalawren@gmail.com', 'password' => bcrypt('dohc2000')],
-            1 => ['name' => 'Justin King', 'email' => 'justin@healthhabitcoach.com', 'password' => bcrypt('password')],
+            1 => ['name' => 'Justin King', 'email' => 'justin@healthhabitcoach.com', 'password' => bcrypt('H3a1thH@61t')],
         ];
 
         /**

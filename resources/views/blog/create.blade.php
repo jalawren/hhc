@@ -33,8 +33,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="content">content:</label>
                             <div class="col-sm-10">
@@ -46,6 +44,7 @@
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn hhc-btn">Post</button>
                                 <button type="reset" class="btn hhc-btn">Clear</button>
+                                {{--<button type="button" id="tag-btn" class="btn hhc-btn">New Tag</button>--}}
                             </div>
                         </div>
                     </form>
@@ -53,5 +52,17 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    {{--<div class="modal fade" id="tag-modal" role="dialog">--}}
+        {{--<tag></tag>--}}
+    {{--</div>--}}
+    {{--<script>--}}
+        {{--$(document).ready(function(){--}}
+            {{--$("#tag-btn").click(function(){--}}
+                {{--$("#tag-modal").modal();--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
 
 @endsection

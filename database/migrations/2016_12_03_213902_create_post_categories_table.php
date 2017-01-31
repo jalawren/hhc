@@ -13,12 +13,12 @@ class CreatePostCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 50);
-            $table->text('description')->nullable();
-            $table->timestamps();
-        });
+//        Schema::create('post_categories', function (Blueprint $table) {
+//            $table->increments('id');
+//            $table->string('name', 50);
+//            $table->text('description')->nullable();
+//            $table->timestamps();
+//        });
     }
 
     /**
@@ -28,7 +28,7 @@ class CreatePostCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_categories');
+//        Schema::dropIfExists('post_categories');
 
     }
 }

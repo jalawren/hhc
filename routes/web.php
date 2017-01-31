@@ -51,6 +51,12 @@ Route::get('/blog/tag/{id}', 'PostController@indexByTag');
 Route::resource('/blog', 'PostController');
 
 /**
+ * Tag Controller
+ */
+Route::resource('/tags', 'TagController');
+
+
+/**
  *
  * Auth Routes
  */

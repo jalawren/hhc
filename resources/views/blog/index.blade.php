@@ -4,11 +4,6 @@
 
 @section('content')
 
-    <div>
-
-        @include('flash::message')
-
-    </div>
 
     <div>
         <h3>{{ config('blog.title') }}</h3>

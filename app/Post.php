@@ -19,7 +19,9 @@ class Post extends Model
      *
      * @var array
      */
-    protected $dates = ['published_at'];
+    protected $dates = [
+        'published_at'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +29,11 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'slug', 'category_id', 'user_id', 'title', 'content'
+        'slug',
+        'category_id',
+        'user_id',
+        'title',
+        'content'
     ];
 
     /**
@@ -36,7 +42,9 @@ class Post extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at', 'updated_at'
+        'created_at',
+        'updated_at',
+
     ];
 
     /**
@@ -129,17 +137,24 @@ class Post extends Model
     {
         if($input['title'] != NULL && $input['content'] != NULL)
         {
+            $tags = [];
+
+            foreach($input['tags'] as $tag)
+            {
+                array_push($tags, $tag);
+            }
+
             $post->user_id = Auth::id();
-
             $post->title = $input['title'];
-
             $post->content = $input['content'];
+
+            $post->tags()->sync($tags);
 
             $post->save();
 
             flash('The blog entry was updated successfully!', 'success');
 
-            return redirect('/blog');
+            return redirect('/blog/' . $post->slug);
         }
     }
 
@@ -150,13 +165,15 @@ class Post extends Model
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function deletePost($input, $id)
+    public function deletePost($post, $id)
     {
-        if($input != NULL)
+        if($post != NULL)
         {
-            $name = $input->slug;
+            $name = $post->slug;
 
-            $input->delete();
+            $post->tags()->detach();
+
+            $post->delete();
 
             if($this->find($id) == NULL)
             {

@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-//require('./bootstrap-tagsinput');
 
 
 /**
@@ -16,36 +15,16 @@ require('./bootstrap');
  */
 
 //Vue.component('example', require('./components/Example.vue'));
+//Vue.component('tag', require('./components/Tag.vue'));
 $(document).ready(function(){
-    const app = new Vue({
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 
-        el: '#app',
-
-        data: {
-            input: '',
-
-            dom: '',
-
-            tags: []
-
-
-        },
-
-        methods: {
-
-            addTag: function() {
-
-                this.tags.push(this.input);
-
-                this.input = '';
-            },
-
-            selectTag: function(event) {
-                this.dom = event.target.tagName;
-
-                event.target.setAttribute(selected, selected);
-
-            }
-        }
-    });
 });
+
+
+//    const app = new Vue({
+//
+//        el: '#app'
+//
+//    });
+
