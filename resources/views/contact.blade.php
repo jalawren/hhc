@@ -9,7 +9,7 @@
     <div class="panel panel-default hhc-panel">
         <div class="panel-body">
             <p>
-                email: <a href="mailto:justin@healthhabitcoach.com">justin@healthhabitcoach.com</a>
+                email: <a href="mailto:kingjustin227@gmail.com">kingjustin227@gmail.com</a>
             </p>
 
         </div>
