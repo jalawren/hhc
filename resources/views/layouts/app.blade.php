@@ -36,6 +36,7 @@
                     <div class="collapse navbar-collapse" id="hhc-nav">
                         <ul class="nav navbar-nav">
 
+                            <li><a href="{{ route('intro') }}">intro</a></li>
                             <li><a href="{{ route('about') }}">about</a></li>
                             <li><a href="{{ route('philosophy') }}">health philosophy</a></li>
                             <li><a href="{{ route('contact') }}">contact</a></li>

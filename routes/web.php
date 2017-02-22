@@ -15,8 +15,8 @@
  * Home Page
  */
 Route::get('/', function () {
-    return view('about');
-})->name('home');
+    return view('intro');
+})->name('intro');
 
 /**
  * About Page
